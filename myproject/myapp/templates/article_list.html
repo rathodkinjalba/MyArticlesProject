@@ -322,7 +322,7 @@
           
             {% if article.like_set.count == 0 %}
               <li id="no-likes-{{ article.id }}">No likes yet</li>
-            {% endif %}
+            {% endif %} 
       
 
             {% for like in article.like_set.all %}

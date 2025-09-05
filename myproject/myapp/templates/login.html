@@ -123,15 +123,13 @@
     <input type="email" name="email_id" id="email_id"placeholder="✉️ email:" required>
 
     <label for="password_id">Password:</label>
-    <input type="password" name="password_id" id="password_id"placeholder="🔒 password:" required><br>
+    <input type="password" name="password_id" id="password_id"placeholder="🔒 password:" required>
 
     <button type="submit">Login</button>
   </form>
 
   <ul class="messages" id="login-message-box"></ul>
 </div>
-  {% comment %} <p>Don’t have an account?<a href="{% url 'register' %}" id="load-register-link">Register here</a></p><br>
-  <p>back to<a href="{% url 'article_list' %}">Articles</a></p> {% endcomment %}
 <div class="bottom-links">
   <p>Dont have an account?
     <a href="{% url 'register' %}" id="load-register-link">Register here</a>
