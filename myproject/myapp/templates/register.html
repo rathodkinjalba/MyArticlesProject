@@ -1,0 +1,133 @@
+{% extends 'base.html' %}
+{% load static %}   
+
+{% block content %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8ff;
+    margin: 50px;
+    padding: 70px ;
+  }
+
+  h2 {
+    text-align: center;
+    margin-top: 30px;
+    color: #474343ff;
+  }
+
+  form {
+    justify-content: center;   /* horizontally center */
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fffdfdff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  label {
+    display: block;
+    margin-top: 15px;
+    color: #555;
+    font-weight: bold;
+  }
+
+  input[type="text"],
+  input[type="email"],
+  input[type="password"],
+  input[type="tel"] {
+    width: 100%;
+    padding: 12px 14px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+    border-color: #606468ff;
+  }
+
+  input:focus {
+    border-color: #3373bdff;
+    box-shadow: 0 0 4px rgba(36, 87, 145, 0.5);
+  }
+
+  button {
+    width: 100%;
+    padding: 12px;
+    margin-top: 15px;
+    background-color: #255d91ff;
+    color: white;
+    border: none;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #205188ff;
+  }
+
+  .messages {
+    list-style: none;
+    padding: 0;
+    margin-top: 10px;
+    text-align: center;
+  }
+
+  .messages li {
+    color: red;
+    font-size: 14px;
+  }
+
+  p {
+    margin-top: 15px;
+    text-align: center;
+    font-size: 14px;
+    color: #555;
+  }
+
+  p a {
+    color: #305e92ff;
+    text-decoration: none;
+    font-weight: bold;
+    margin-left: 5px;
+  }
+
+  p a:hover {
+    text-decoration: underline;
+    
+  }
+  
+</style>
+  <h2>Register</h2>
+
+
+<form id="register-form" action="/register/" method="POST">
+  {% csrf_token %}
+  
+  <label for="username_id">Username:</label>
+  <input type="text" name="username_id" id="username_id" placeholder="👤 enter your name:" required><br>
+
+  <label for="email_id">Email:</label>
+  <input type="email" name="email_id" id="email_id" placeholder="✉️ email:" required><br>
+
+  <label for="password_id">Password:</label>
+  <input type="password" name="password_id" id="password_id"placeholder="🔒 password:" required><br>
+
+  <label for="phone_id">Phone:</label>
+  <input type="tel" name="phone_id" id="phone_id" placeholder="📞 phone:" required><br>
+
+  <button type="submit">Register</button>
+</form>
+
+<ul class="messages" id="message-box"></ul>
+
+<div class="bottom-links">
+  <p>Already have an account? <a href="{% url 'login' %}" id="load-login-link">Login here</a></p>
+  <p><a href="{% url 'article_list' %}">← Back to Articles</a></p>
+</div>
+{% endblock %} 

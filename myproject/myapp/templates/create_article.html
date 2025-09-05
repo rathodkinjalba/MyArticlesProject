@@ -1,0 +1,160 @@
+{% extends 'base.html' %}
+{% load static %}   
+{% block content %}
+
+<style>
+  /* Create Article Page Styles */
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8ff;
+    margin: 50px;
+    padding: 70px ;
+    text-align: center;
+
+  }
+
+  h2 {
+    margin-top: 30px;
+    color: #474343ff;;
+  }
+
+  form {
+    text-align: left;
+    justify-content: center;   /* horizontally center */
+    max-width: 600px;
+    margin: 20px auto;
+    background: #fffdfdff;
+    padding: 50px 70px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+  }
+
+  label {
+    font-weight: bold;
+    display: block;
+    margin-bottom: 5px;
+    color: #555;
+  }
+
+  input[type="text"],
+  textarea {
+    
+    width: 100%;
+    padding: 15px 12px;
+    margin-bottom: 20px;
+    border: 1px solid #ccc;
+    border-radius: 6px;
+    font-size: 14px;
+    background-color: #fafafa;
+    border-color: #3373bdff;
+    box-shadow: 0 0 4px rgba(36, 87, 145, 0.5);
+  }
+  
+
+  textarea {
+    resize: vertical;
+  }
+
+  /* Common Button Styles */
+  button[type="submit"],
+  button[type="button"] {
+    color: white;
+    padding: 10px 18px;
+    border: none;
+    border-radius: 5px;
+    font-size: 14px;
+    margin-right: 20px;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+  }
+  
+
+  /* Specific Button Colors */
+  button#publish-btn {
+    background-color: #2161a5ff;
+  }
+
+  button#draft-btn {
+    background-color: #2161a5ff;
+  }
+
+  button#cancel-btn {
+    background-color: #336eb1ff;
+    
+  }
+
+  button:hover {
+    opacity: 0.9;
+  }
+
+  a {
+    color: #3e6d9eff;
+    text-decoration: none;
+    font-weight: 500;
+  }
+
+  a:hover {
+    text-decoration: underline;
+  }
+
+  .bug {
+    margin-top: 10px;
+/* Wrap the links in a container */
+  .nav-links {
+    display: flex;
+    justify-content: space-between; /* Push left & right */
+    margin-top: 20px;
+    padding: 10px 0;
+    border-top: 1px solid #ddd;
+  }
+
+  .nav-links a {
+    text-decoration: none;
+    font-weight: bold;
+    color: #3498db;
+    transition: color 0.2s ease;
+  }
+
+  .nav-links a:hover {
+    color: #2980b9;
+  }
+
+
+  }
+
+
+</style>
+
+<h2>{% if draft %}Edit Draft{% else %}Create Article{% endif %}</h2>
+
+<form method="post" id="article-form"
+      action="{% if draft %}{% url 'edit_draft' draft.id %}{% else %}{% url 'create_article' %}{% endif %}">
+  {% csrf_token %}
+
+
+  <label for="title">Title:</label>
+  <input type="text" id="title" name="title"placeholder="Create Title:" value="{% if draft %}{{ draft.title }}{% endif %}" required>
+
+  <label for="content">Content:</label>
+  <textarea id="content" name="content"placeholder="Write Content:" required>{% if draft %}{{ draft.content }}{% endif %}</textarea>
+
+  <label for="tags">Tags:</label>
+  <input type="text" id="tags" name="tags" placeholder="Add Tags:"value="{% if draft %}{{ draft.tags }}{% endif %}">
+
+  <div class="bug">
+  <button type="submit" id="publish-btn" name="publish">Publish</button>
+  
+  <button type="submit" id="draft-btn" name="save_as_draft">Save as Draft</button>
+  <button type="button" id="cancel-btn">Cancel</button>
+  </div>
+<br> 
+</form>
+<div class="nav-links">
+
+<a href="/article_list/" id="back-to-article-list">Back to Article List</a>  
+
+{% if draft %}
+  <a href="/draft_list/" id="back-to-draft-list">Back to Draft List</a> 
+</div>
+{% endif %}
+{% endblock %}

@@ -1,0 +1,144 @@
+{% extends 'base.html' %}
+{% load static %}   
+
+{% block content %}
+<style>
+  body {
+    font-family: Arial, sans-serif;
+    background-color: #f4f6f8;
+    padding: 150px ;
+  }
+
+  .container {
+    justify-content: center;   /* horizontally center */
+    align-items: center;  
+    max-width: 500px;
+    margin: 20px auto;
+    background: #fffdfdff;
+    padding: 30px 40px;
+    border-radius: 10px;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+ 
+  }
+
+  h2 {
+    text-align: center;
+    color: #333;
+    
+  }
+
+  label {
+    display: block;
+    margin-top: 10px;
+    color: #383333ff;
+    font-weight: bold;
+  }
+
+  input[type="email"],
+  input[type="password"] {
+    width: 100%;
+    padding: 10px 12px;
+    margin-top: 5px;
+    border-radius: 8px;
+    border: 1px solid #ccc;
+    font-size: 14px;
+    box-sizing: border-box;
+    outline: none;
+    transition: 0.3s;
+    border-color: #6b6d6eff;
+  }
+
+  input:focus {
+    border-color: #517aacff;
+    box-shadow: #517aacff;
+  }
+
+  button {
+    width: 100%;
+    padding: 10px;
+    margin-top: 15px;
+    background-color: #395f8aff;
+    color: white;
+    border: none;
+    font-size: 15px;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+
+  button:hover {
+    background-color: #24558aff;
+  }
+
+  .messages {
+    list-style: none;
+    margin-top: 10px;
+  }
+
+  .messages li {
+    color: red;
+    font-size: 14px;
+  }
+
+
+  /* Register + Back links section */
+  .bottom-links {
+    margin-top: 15px;
+    text-align: center;
+  }
+
+  .bottom-links p {
+    margin: 6px 0;
+    font-size: 14px;
+    color: #555;
+  }
+
+  .bottom-links a {
+    color: #30628b;
+    font-weight: 600;
+    text-decoration: none;
+    margin-left: 5px;
+    transition: 0.3s;
+  }
+
+  .bottom-links a:hover {
+    text-decoration: underline;
+    color: #204d74;
+  }
+
+  
+  .bottom-links p:last-child {
+  margin-top: 15px;   
+}
+
+
+ 
+</style>
+  <h2>Login</h2>
+<div class="container">
+  <form id="login-form" method="POST" action="/login/">
+    {% csrf_token %}
+    <label for="email_id">Email:</label>
+    <input type="email" name="email_id" id="email_id"placeholder="✉️ email:" required><br>
+
+    <label for="password_id">Password:</label>
+    <input type="password" name="password_id" id="password_id"placeholder="🔒 password:" required><br>
+
+    <button type="submit">Login</button>
+  </form>
+
+  <ul class="messages" id="login-message-box"></ul>
+</div>
+  {% comment %} <p>Don’t have an account?<a href="{% url 'register' %}" id="load-register-link">Register here</a></p><br>
+  <p>back to<a href="{% url 'article_list' %}">Articles</a></p> {% endcomment %}
+<div class="bottom-links">
+  <p>Dont have an account?
+    <a href="{% url 'register' %}" id="load-register-link">Register here</a>
+  </p>
+  <p>
+    <a href="{% url 'article_list' %}">← Back to Articles</a>
+  </p>
+</div>
+
+
+{% endblock %}

@@ -1,0 +1,134 @@
+{% extends 'base.html' %}
+{% load static %}   
+{% block content %}
+<style>
+    .draft {
+    background: #f9f9f9;
+    padding: 90px;
+    border-radius: 15px;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+    max-width: 900px;
+    margin: 30px auto;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    }
+
+    h2 {
+    text-align: center;
+    font-size: 28px;
+    margin-bottom: 25px;
+    color: #333;
+    }
+
+    .draft .draft-list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    }
+
+    .draft .draft-list li {
+    background: #fff;
+    border: 1px solid #ddd;
+    margin-bottom: 20px;
+    padding: 20px;
+    border-radius: 12px;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    }
+
+    .draft .draft-list li:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 6px 15px rgba(0,0,0,0.15);
+    }
+
+    .draft h3 {
+    margin-top: 0;
+    font-size: 22px;
+    color: #2c3e50;
+    }
+
+    .draft p {
+    margin: 8px 0;
+    color: #555;
+    }
+
+    .draft button {
+    padding: 8px 15px;
+    margin-right: 10px;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-size: 14px;
+    transition: background 0.2s ease;
+    }
+
+    .draft button a {
+    text-decoration: none;
+    color: white;
+    }
+
+    .draft button:first-of-type {
+    background: #3498db;
+    }
+
+    .draft button:first-of-type:hover {
+    background: #2980b9;
+    }
+
+    #cancel-btn {
+    background: #e74c3c;
+    color: white;
+    }
+
+    #cancel-btn:hover {
+    background: #c0392b;
+    }
+
+    .draft footer {
+    margin-top: 25px;
+    text-align: center;
+    padding-top: 15px;
+    border-top: 1px solid #ddd;
+    }
+
+    .draft footer a {
+    text-decoration: none;
+    color: #3498db;
+    font-weight: bold;
+    margin: 0 8px;
+    transition: color 0.2s ease;
+    }
+
+    .draft footer a:hover {
+    color: #2980b9;
+    }
+    
+</style>
+<h2>Your Draft Articles</h2>
+
+<div class="draft">
+<div class="container" id="draft-list-page">  
+    {% if drafts %}
+        <ul class="draft-list">
+            {% for draft in drafts %}
+                <li>
+                    <h3>Title: {{ draft.title }}</h3>
+                    <p>Content: {{ draft.content|truncatewords:2000 }}</p>
+                    <p>Tags: {{ draft.tags }}</p>
+                    
+                    <button>  <a href="{% url 'edit_draft' draft.id %}" class="edit-draft-link">Edit</a></button>
+                    <a href="{% url 'delete_draft' draft.id %}" >
+                        <button type="button" id="cancel-btn">Cancel</button>
+                    </a>
+
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>You have no draft articles.</p>
+    {% endif %}
+<footer>
+    <a href="{% url 'create_article' %}" id="load-create-article">Create a New Article</a> | 
+    <a href="{% url 'article_list' %}" id="back-article-list">Back to All Articles</a>
+</footer>
+</div>
+</div>
+{% endblock %}
