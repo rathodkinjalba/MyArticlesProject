@@ -2,3 +2,4 @@ git add .
 git commit -m "Update code"
 git push origin main
 
+myenv\Scripts\activate
